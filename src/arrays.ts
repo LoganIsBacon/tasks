@@ -9,11 +9,11 @@ export function bookEndList(numbers: number[]): number[] {
     const numberFirstAndLast: number[] = [];
     if (length === 0) {
         return numberFirstAndLast;
+    } else {
+        numberFirstAndLast[0] = numbers[0];
+        numberFirstAndLast[1] = numbers[length - 1];
     }
-    numberFirstAndLast[0] = numbers[0];
-    numberFirstAndLast[1] = numbers[length - 1];
-    numbers = numberFirstAndLast;
-    return numbers;
+    return numberFirstAndLast;
 }
 
 /**
@@ -21,7 +21,8 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    const triple = numbers.map((numbers: number): number => numbers * 3);
+    return triple;
 }
 
 /**
@@ -29,7 +30,10 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    const stringToInt = numbers.map((numbers: string): number =>
+        Number.parseInt(numbers) ? +numbers : 0
+    );
+    return stringToInt;
 }
 
 /**
@@ -40,7 +44,14 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    const noDollars = amounts.map((numbers: string): string =>
+        numbers.replace("$", "")
+    );
+
+    const stringToInt = noDollars.map((numbers: string): number =>
+        Number.parseInt(numbers) ? +numbers : 0
+    );
+    return stringToInt;
 };
 
 /**
@@ -49,7 +60,13 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    const questionMark = messages.map((message: string): string =>
+        message.includes("?") ? message
+    );
+    const exclamationPoint = questionMark.map((message: string): string =>
+        message.includes("!") ? message.toUpperCase() : message
+    );
+    return exclamationPoint;
 };
 
 /**
