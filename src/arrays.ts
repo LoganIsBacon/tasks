@@ -60,12 +60,13 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    const questionMark = messages.map((message: string): string =>
-        message.includes("?") ? message
-    );
+    const questionMark = messages.filter((message) => !message.endsWith("?"));
     const exclamationPoint = questionMark.map((message: string): string =>
         message.includes("!") ? message.toUpperCase() : message
     );
+    //    const removeQuotes = exclamationPoint.map((message: string): string =>
+    //        message = message.filter(e => e !== "")
+    //    );
     return exclamationPoint;
 };
 
@@ -74,7 +75,10 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    const shortWordCount = words.filter(
+        (word: string): boolean => word.length < 4
+    );
+    return shortWordCount.length;
 }
 
 /**
@@ -83,7 +87,11 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    const colorCheck = colors.every(
+        (color: string): boolean =>
+            color === "red" || color === "blue" || color === "green"
+    );
+    return colorCheck;
 }
 
 /**
@@ -94,7 +102,11 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (addends.length === 0) {
+        return "0=0";
+    }
+    const sum = addends.reduce((total, num) => total + num, 0);
+    return sum + "=" + addends.join("+");
 }
 
 /**
@@ -107,5 +119,27 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    // Search for the index of a negative number
+    const negative = values.findIndex((number) => number < 0);
+    // Code for if there are no negative numbers. Get sum of all values.
+    if (negative === -1) {
+        const totalSum = values.reduce(
+            (total: number, item: number) => total + item,
+            0
+        );
+        // Add sum to the end of the array
+        return [...values, totalSum];
+    } else {
+        // This code is for when the negative number is found.
+        // When it's found it gets the sum of the positive numbers before it.
+        const sum = values
+            .slice(0, negative)
+            .reduce((total: number, item: number) => total + item, 0);
+
+        //values to seperate the array to make it easier to return.
+        const beforeNeg = values.slice(0, negative + 1);
+        const afterNeg = values.slice(negative + 1, values.length);
+
+        return [...beforeNeg, sum, ...afterNeg];
+    }
 }
