@@ -9,6 +9,7 @@ import { TwoDice } from "./components/TwoDice";
 import { CycleHoliday } from "./components/CycleHoliday";
 import { Counter } from "./components/Counter";
 
+/// Hello
 function App(): JSX.Element {
     return (
         <div className="App">
@@ -62,7 +63,7 @@ function App(): JSX.Element {
                     <ul>
                         <li>Skateboarding</li>
                         <li>Playing video games</li>
-                        <li>Frogs</li>
+                        <li>Frog</li>
                     </ul>
                 </div>
             </>
